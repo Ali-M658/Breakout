@@ -7,15 +7,15 @@ namespace WindowsFormsApp
     {
         public static void checkCollision(Paddle paddle, Ball ball)
         {
-            //Console.WriteLine($"{paddle.Top-10} and {ball.Y} and {ball.X} and {paddle.Left} and  {paddle.Right}");
-            if (ball.Y == (paddle.Top - 10) && (ball.X >= paddle.Left && ball.X <= paddle.Right)) 
-            {
+            ///Console.WriteLine(paddle.Top+" paddle top");
+            Console.WriteLine(ball.Top + " ball top");
+            //Console.WriteLine(paddle.Left + " paddle left");
+            //Console.WriteLine(paddle.Right + " paddle right");
+            Console.WriteLine(ball.Right + " ball right");
+            Console.WriteLine(ball.Left + " ball left");
+            if ((ball.Y >= (paddle.Bottom - 25) && ball.Y <= (paddle.Bottom - 19)) && (ball.Left >= paddle.Left && ball.Right <= paddle.Right)) {
+                Console.WriteLine("If statement reached in PaddleBallCollisionChecker");
                 ball.yspeed = -ball.yspeed;
-            }
-            
-            else
-            {
-                int e = 0;
             }
         }
 

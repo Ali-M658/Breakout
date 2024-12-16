@@ -5,38 +5,52 @@ using System.Drawing;
 using System.Text.Encodings.Web;
 using Timer = System.Threading.Timer;
 using System.Threading.Tasks;
-
+using System.Media;
 namespace WindowsFormsApp
 {
     public class MainForm : Form 
     {
         private Paddle paddle;
-        private Brick brick;
+        private SoundPlayer soundPlayer;
+        private string path = "C:\\Users\\ali\\Downloads\\spooky-scary-wind-rising_70bpm.wav";
         private BrickLogic brickLogic;
         private ResizeHandler handler = new ResizeHandler();
         private GameLoop loop;
         private readonly CancellationTokenSource cts = new();
-        private int delayTime = 8;
         private KeyListeners listeners;
         Ball ball;
-        private Components components;
         public MainForm()
         {
-            paddle = new Paddle();
-            ball = new Ball();
-            components = new Components(this);
-            components.components();
+            soundPlayer = new SoundPlayer(path);
+            soundPlayer.PlayLooping();
+            brickLogic = new BrickLogic(this);
+            components();
             subscriptions();
             formParams();
             loop = new GameLoop(paddle, ball, this);
             loop.startGame();
         }
 
+        
+        public void components()
+        { 
+            brickLogic = new BrickLogic(this);
+            brickLogic.DrawBricks(); 
+            brickLogic.MakeBricks();
+            paddle = new Paddle() { Location = new Point(Width/3, 500) }; 
+            Console.WriteLine(Height); 
+            Controls.Add(paddle); 
+            ball = new Ball {
+                Dock = DockStyle.Fill, 
+                Location = new Point(Width / 2, Height / 2),
+            };            
+            Controls.Add(ball);         
+        }
         private void formParams()
         {
             this.BackColor = Color.Black;                                              
             this.Size = new Size(1200, 800);                                           
-            this.Text = "BrickBall (wip)";                                             
+            this.Text = "HorrorBall";                                             
             this.KeyPreview = true;                                                    
             this.FormBorderStyle = FormBorderStyle.FixedDialog;                        
             this.MaximizeBox = true;                                                                                
@@ -53,6 +67,10 @@ namespace WindowsFormsApp
             handler.ResizeHandlers(this, new Panel[] { paddle, ball });
         }
 
+        public void Add(Panel panel)
+        {
+            Controls.Add(panel);
+        }
         [STAThread]
         public static void Main(String[] args)
         {

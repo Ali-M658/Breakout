@@ -37,8 +37,7 @@ public class Ball : Panel
         
         ballWidth = 20;
         ballHeight = 20;
-        
-        using Pen pen = new Pen(Color.Red, 3);
+        Left = X;
         using SolidBrush brush = new SolidBrush(Color.LightSeaGreen);
         Rectangle ellipseRectangle = new Rectangle(X, Y, ballWidth, ballHeight);
         g.FillEllipse(brush, ellipseRectangle);

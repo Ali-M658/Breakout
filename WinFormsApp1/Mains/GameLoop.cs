@@ -26,7 +26,6 @@ public class GameLoop
                 await Task.Delay(gameLoopTime, cts.Token);
                 paddle.Move();
                 ball.Move(10,10);
-                Console.WriteLine("Game loop");
                 PaddleBallCollisionChecker.checkCollision(paddle, ball);
                 PaddleBallCollisionChecker.checkCollisionWithWall(ball, form.ClientSize.Width, form.ClientSize.Height);
             }

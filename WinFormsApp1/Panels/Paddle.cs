@@ -39,13 +39,12 @@ namespace WindowsFormsApp
             this.Size = new Size(100, 20); // Default size of the paddle
             this.BackColor = Color.ForestGreen; // Default color of the paddle
             this.BorderStyle = BorderStyle.FixedSingle; // Optional border for the paddle
-            SetBounds(this.Location.X, this.Location.Y, Width, Height);
         }
         
         
         public void Move()
         {
-            if (Parent == null) return;
+            if (Parent == null){Console.WriteLine("Parent is null");}
             int nextLeft = this.Left + (direction * speed);
             // Smart
             if (nextLeft >= 0 && nextLeft + this.Width <= this.Parent.ClientSize.Width)

@@ -29,7 +29,7 @@ public class BrickLogic
     {
         for (int i = 0; i < brickCount; i++)
         {
-            form.Controls.Add(bricks[i]);
+            form.Add(bricks[i]);
         }
     }
 }
